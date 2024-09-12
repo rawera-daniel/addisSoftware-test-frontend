@@ -20,15 +20,22 @@ const GlobalStyles = () => (
         padding: 0;
         box-sizing: border-box;
       }
+
+      html {
+        font-size: 62.5%;
+      }
+
       body {
         font-family: 'Poppins', sans-serif;
         color: #4b5563;
         line-height: 1.5;
       }
+
       a {
         text-decoration: none;
         color: inherit;
       }
+
       ul {
         list-style-type: none;
       }
