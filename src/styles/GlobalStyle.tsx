@@ -29,6 +29,7 @@ const GlobalStyles = () => (
         font-family: 'Poppins', sans-serif;
         color: #4b5563;
         line-height: 1.5;
+        font-size: 1.6rem;
       }
 
       a {
