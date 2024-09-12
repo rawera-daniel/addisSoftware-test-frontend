@@ -1,5 +1,11 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 export default function AppLayout() {
-  return <div>App Layout</div>
+  return (
+    <div>
+      <p>App Layout</p>
+      <Outlet />
+    </div>
+  )
 }
