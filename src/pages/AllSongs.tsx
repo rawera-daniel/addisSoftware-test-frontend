@@ -1,6 +1,7 @@
 import React from 'react'
 import Heading from '../ui/Heading'
 import Row from '../ui/Row'
+import SongTable from '../features/songs/SongTable'
 
 export default function AllSongs() {
   return (
@@ -8,7 +9,7 @@ export default function AllSongs() {
       <Heading as="h1">All Songs</Heading>
 
       <Row type="vertical">
-        <p>Song Table</p>
+        <SongTable />
         <p>Add new songs</p>
       </Row>
     </>
