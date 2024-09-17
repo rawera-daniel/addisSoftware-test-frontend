@@ -40,6 +40,18 @@ const GlobalStyles = () => (
       ul {
         list-style-type: none;
       }
+
+      input,
+      button {
+        font: inherit;
+        color: inherit;
+      }
+
+      input:focus,
+      button:focus {
+        outline: 2px solid #d97706;
+        outline-offset: -1px;
+      }
     `}
   />
 )
