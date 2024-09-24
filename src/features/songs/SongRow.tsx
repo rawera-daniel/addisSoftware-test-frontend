@@ -1,51 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from '@emotion/styled'
-
-type Song = {
-  title: string
-  artist: string
-  album: string
-  genre: string
-}
-
-const songs: Song[] = [
-  {
-    title: 'Shape of You',
-    artist: 'Ed Sheeran',
-    album: 'Divide',
-    genre: 'Pop',
-  },
-  {
-    title: 'Despacito',
-    artist: 'Luis Fonsi',
-    album: 'Vida',
-    genre: 'Latin',
-  },
-  {
-    title: 'Rolling in the Deep',
-    artist: 'Adele',
-    album: '21',
-    genre: 'Pop',
-  },
-  {
-    title: 'Imagine',
-    artist: 'John Lennon',
-    album: 'Imagine',
-    genre: 'Rock',
-  },
-  {
-    title: 'Stairway to Heaven',
-    artist: 'Led Zeppelin',
-    album: 'Led Zeppelin IV',
-    genre: 'reggae',
-  },
-  {
-    title: 'Goota koo',
-    artist: 'Hacalu Hundessa',
-    album: 'Maal Mallisaa',
-    genre: 'Traditional',
-  },
-]
+import { useDispatch, useSelector } from 'react-redux'
+import { getSongsFetch } from '../../reducers/songSlice'
+import { RootState } from '../../Store'
 
 const SongsRow = styled.div`
   display: grid;
@@ -62,6 +19,15 @@ const SongsRow = styled.div`
 `
 
 function SongRow() {
+  const dispatch = useDispatch()
+  const songs = useSelector((state: RootState) => state.song.songs)
+  const isLoading = useSelector((state: RootState) => state.song.isLoading)
+  const isError = useSelector((state: RootState) => state.song.isError)
+
+  useEffect(() => {
+    dispatch(getSongsFetch())
+  }, [dispatch])
+
   return (
     <section>
       {songs.map((song, index) => (

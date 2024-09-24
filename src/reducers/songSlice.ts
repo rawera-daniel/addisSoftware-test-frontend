@@ -1,26 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { State } from '../types/stateType'
 
-const initialState = {
+const initialState: State = {
   songs: [],
-  loading: false,
-  error: null,
+  isLoading: false,
+  isError: null,
 }
 
 const songSlice = createSlice({
-  name: 'account',
+  name: 'song',
   initialState,
   reducers: {
     getSongsFetch(state) {
-      state.loading = true
-      state.error = null
+      state.isLoading = true
+      state.isError = null
     },
     getSongsSuccess(state, action) {
-      state.loading = false
+      state.isLoading = false
       state.songs = action.payload
     },
     getSongsFailure(state, action) {
-      state.loading = false
-      state.error = action.payload
+      state.isLoading = false
+      state.isError = action.payload
     },
   },
 })

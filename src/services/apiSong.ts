@@ -1,5 +1,5 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3000'
+const BASE_URL = 'http://127.0.0.1:3000/'
 
-export const fetchSongs = () => axios.get(`${baseUrl}/api/v1/songs`)
+export const fetchSongs = () => axios.get(`${BASE_URL}api/v1/songs`)
