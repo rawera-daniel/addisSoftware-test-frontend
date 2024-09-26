@@ -12,7 +12,7 @@ const Table = styled.div`
 
 const TableHeader = styled.header`
   display: grid;
-  grid-template-columns: 0.7fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.7fr 1fr 1fr 1fr 1fr 0.5fr;
   column-gap: 2.4rem;
   align-items: center;
 
@@ -34,6 +34,7 @@ function SongTable() {
         <div>Artist</div>
         <div>Album</div>
         <div>Genre</div>
+        <div></div>
       </TableHeader>
       <SongRow />
     </Table>

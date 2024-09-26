@@ -9,6 +9,11 @@ const sizes = {
     padding: 1.2rem 1.6rem;
     font-weight: 500;
   `,
+  small: css`
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    text-align: center;
+  `,
 }
 
 const variations = {
@@ -18,15 +23,6 @@ const variations = {
 
     &:hover {
       background-color: #d97706;
-    }
-  `,
-  secondary: css`
-    color: var(--color-grey-600);
-    background: var(--color-grey-0);
-    border: 1px solid var(--color-grey-200);
-
-    &:hover {
-      background-color: var(--color-grey-50);
     }
   `,
 }
