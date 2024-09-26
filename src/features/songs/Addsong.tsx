@@ -37,7 +37,7 @@ function Addsong() {
       </Button>
       {isOpenModal && (
         <Modal onClose={() => setIsOpenModal(false)}>
-          <CreateSongForm />
+          <CreateSongForm onClose={() => setIsOpenModal(false)} />
         </Modal>
       )}
     </>

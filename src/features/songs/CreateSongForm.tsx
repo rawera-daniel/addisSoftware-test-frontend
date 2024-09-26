@@ -4,6 +4,8 @@ import FormRow from '../../ui/FormRow'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Input from '../../ui/Input'
 import Button from '../../ui/Button'
+import { useDispatch } from 'react-redux'
+import { addNewSong, getSongsFetch } from '../../reducers/songSlice'
 
 interface IFormInput {
   title: string
@@ -12,15 +14,24 @@ interface IFormInput {
   genre: string
 }
 
-function CreateSongForm() {
+interface CreateSongFormProps {
+  onClose: () => void
+}
+
+function CreateSongForm({ onClose }: CreateSongFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>()
+  const dispatch = useDispatch()
 
   const onSubmit: SubmitHandler<IFormInput> = function (data) {
-    console.log(data)
+    const newSong = { ...data }
+    console.log('FORM', newSong)
+
+    dispatch(addNewSong(newSong))
+    onClose()
   }
 
   return (

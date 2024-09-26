@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSongsFetch } from '../../reducers/songSlice'
 import { RootState } from '../../Store'
+import Spinner from '../../ui/Spinner'
 
 const SongsRow = styled.div`
   display: grid;
@@ -27,6 +28,10 @@ function SongRow() {
   useEffect(() => {
     dispatch(getSongsFetch())
   }, [dispatch])
+
+  if (isLoading) return <Spinner />
+
+  console.log('Reducer', songs)
 
   return (
     <section>
