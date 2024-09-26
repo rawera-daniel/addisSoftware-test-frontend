@@ -6,6 +6,7 @@ import Input from '../../ui/Input'
 import Button from '../../ui/Button'
 import { useDispatch } from 'react-redux'
 import { addNewSong, getSongsFetch } from '../../reducers/songSlice'
+import { closeModal } from '../../reducers/modelSlice'
 
 interface IFormInput {
   title: string
@@ -14,11 +15,7 @@ interface IFormInput {
   genre: string
 }
 
-interface CreateSongFormProps {
-  onClose: () => void
-}
-
-function CreateSongForm({ onClose }: CreateSongFormProps) {
+function CreateSongForm() {
   const {
     register,
     handleSubmit,
@@ -26,12 +23,16 @@ function CreateSongForm({ onClose }: CreateSongFormProps) {
   } = useForm<IFormInput>()
   const dispatch = useDispatch()
 
+  function handleClose() {
+    return dispatch(closeModal())
+  }
+
   const onSubmit: SubmitHandler<IFormInput> = function (data) {
     const newSong = { ...data }
     console.log('FORM', newSong)
 
     dispatch(addNewSong(newSong))
-    onClose()
+    handleClose()
   }
 
   return (

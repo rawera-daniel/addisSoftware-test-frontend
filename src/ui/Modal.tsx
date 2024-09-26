@@ -1,5 +1,7 @@
 import React, { Children, ReactNode } from 'react'
 import styled from '@emotion/styled'
+import { useDispatch } from 'react-redux'
+import { closeModal } from '../reducers/modelSlice'
 
 const Overlay = styled.div`
   /* position: fixed;
@@ -60,14 +62,19 @@ const CancelButton = styled.button`
 
 interface ModalProps {
   children: ReactNode
-  onClose: () => void
 }
 
-function Modal({ children, onClose }: ModalProps) {
+function Modal({ children }: ModalProps) {
+  const dispatch = useDispatch()
+
+  function handleClose() {
+    return dispatch(closeModal())
+  }
+
   return (
     <Overlay>
       <ModalStyle>{children}</ModalStyle>
-      <CancelButton onClick={onClose}>X</CancelButton>
+      <CancelButton onClick={handleClose}>X</CancelButton>
     </Overlay>
   )
 }

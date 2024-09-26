@@ -3,6 +3,9 @@ import Button from '../../ui/Button'
 import CreateSongForm from './CreateSongForm'
 import styled from '@emotion/styled'
 import Modal from '../../ui/Modal'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../Store'
+import { openModal } from '../../reducers/modelSlice'
 
 const StyledModal = styled.div`
   position: fixed;
@@ -29,15 +32,21 @@ const Overlay = styled.div`
 `
 
 function Addsong() {
-  const [isOpenModal, setIsOpenModal] = useState(false)
+  const isOpen = useSelector((state: RootState) => state.model.isOpen)
+  const dispatch = useDispatch()
+
+  function handleOpen() {
+    return dispatch(openModal())
+  }
+
   return (
     <>
-      <Button position="center" onClick={() => setIsOpenModal((show) => !show)}>
+      <Button position="center" onClick={handleOpen}>
         Add new songs
       </Button>
-      {isOpenModal && (
-        <Modal onClose={() => setIsOpenModal(false)}>
-          <CreateSongForm onClose={() => setIsOpenModal(false)} />
+      {isOpen && (
+        <Modal>
+          <CreateSongForm />
         </Modal>
       )}
     </>

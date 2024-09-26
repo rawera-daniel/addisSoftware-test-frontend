@@ -5,3 +5,6 @@ export interface State {
   isLoading: boolean
   isError: string | null
 }
+export interface ModelState {
+  isOpen: boolean
+}
