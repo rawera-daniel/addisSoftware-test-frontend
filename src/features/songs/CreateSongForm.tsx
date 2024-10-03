@@ -1,38 +1,52 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { SubmitHandler, useForm } from 'react-hook-form'
+
 import Form from '../../ui/Form'
 import FormRow from '../../ui/FormRow'
-import { SubmitHandler, useForm } from 'react-hook-form'
 import Input from '../../ui/Input'
 import Button from '../../ui/Button'
-import { useDispatch } from 'react-redux'
-import { addNewSong, getSongsFetch } from '../../reducers/songSlice'
+import { addNewSong, updateSong } from '../../reducers/songSlice'
 import { closeModal } from '../../reducers/modelSlice'
+import { Song } from '../../types/songType'
 
-interface IFormInput {
+type IFormInput = {
   title: string
   artist: string
   album: string
   genre: string
 }
 
-function CreateSongForm() {
+type SongEditorProps = {
+  songToEdit?: Song
+  modalMode?: 'edit' | 'create'
+}
+
+function CreateSongForm({ modalMode, songToEdit }: SongEditorProps) {
+  const dispatch = useDispatch()
+
+  const editId = songToEdit?._id
+  const editValues = { ...songToEdit }
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>()
-  const dispatch = useDispatch()
+  } = useForm<IFormInput>({
+    defaultValues: modalMode === 'edit' ? editValues : {},
+  })
 
   function handleClose() {
     return dispatch(closeModal())
   }
 
   const onSubmit: SubmitHandler<IFormInput> = function (data) {
-    const newSong = { ...data }
-    console.log('FORM', newSong)
-
-    dispatch(addNewSong(newSong))
-    handleClose()
+    if (modalMode === 'edit') {
+      dispatch(updateSong({ ...data }))
+    } else {
+      dispatch(addNewSong({ ...data }))
+      handleClose()
+    }
   }
 
   return (
@@ -81,7 +95,9 @@ function CreateSongForm() {
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button>Create new song</Button>
+        <Button>
+          {modalMode === 'edit' ? 'Edit song' : 'Create new song'}
+        </Button>
       </FormRow>
     </Form>
   )

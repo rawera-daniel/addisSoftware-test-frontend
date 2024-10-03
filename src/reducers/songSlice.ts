@@ -28,12 +28,27 @@ const songSlice = createSlice({
       state.isError = null
     },
     addNewSongSuccess: (state, action) => {
-      console.log('New song payload:', action.payload)
       state.songs = state.songs.concat(action.payload)
-      // state.songs = [...state.songs, action.payload]
       state.isLoading = false
     },
     addNewSongFailure: (state, action) => {
+      state.isLoading = false
+      state.isError = action.payload
+    },
+    updateSong: (state) => {
+      state.isLoading = true
+      state.isError = null
+    },
+    updateSongSuccess: (state, action) => {
+      state.songs = state.songs.map((song) => {
+        if (song._id === action.payload._id) {
+          return { ...song, ...action.payload }
+        }
+        return song
+      })
+      state.isLoading = false
+    },
+    updateSongFailure: (state, action) => {
       state.isLoading = false
       state.isError = action.payload
     },
@@ -47,6 +62,9 @@ export const {
   addNewSong,
   addNewSongSuccess,
   addNewSongFailure,
+  updateSong,
+  updateSongSuccess,
+  updateSongFailure,
 } = songSlice.actions
 
 export default songSlice.reducer

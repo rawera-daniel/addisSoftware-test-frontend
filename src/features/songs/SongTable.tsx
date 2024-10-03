@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from '@emotion/styled'
 import SongRow from './SongRow'
+import { useDispatch, useSelector } from 'react-redux'
+import { Song } from '../../types/songType'
+import { RootState } from '../../Store'
+import { getSongsFetch } from '../../reducers/songSlice'
+import Spinner from '../../ui/Spinner'
 
 const Table = styled.div`
   border: 1px solid #e5e7eb;
@@ -26,6 +31,17 @@ const TableHeader = styled.header`
 `
 
 function SongTable() {
+  const dispatch = useDispatch()
+  const songs = useSelector((state: RootState) => state.song.songs)
+  const isLoading = useSelector((state: RootState) => state.song.isLoading)
+
+  useEffect(() => {
+    dispatch(getSongsFetch())
+  }, [dispatch])
+
+  if (isLoading) return <Spinner />
+  console.log('All', songs)
+
   return (
     <Table role="table">
       <TableHeader role="row">
@@ -36,7 +52,9 @@ function SongTable() {
         <div>Genre</div>
         <div></div>
       </TableHeader>
-      <SongRow />
+      {songs.map((song, index) => (
+        <SongRow song={song} index={index} key={song._id} />
+      ))}
     </Table>
   )
 }

@@ -7,3 +7,6 @@ export const fetchSongs = () => axios.get(`${BASE_URL}api/v1/songs`)
 
 export const createSongs = (data: Song) =>
   axios.post(`${BASE_URL}api/v1/songs`, data)
+
+export const updateSongs = (updateData: Song) =>
+  axios.patch(`${BASE_URL}api/v1/songs/${updateData._id}`, updateData)

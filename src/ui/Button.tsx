@@ -25,6 +25,14 @@ const variations = {
       background-color: #d97706;
     }
   `,
+  secondary: css`
+    color: #4b5563;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    &:hover {
+      background-color: #f9fafb;
+    }
+  `,
 }
 
 interface ButtonProps {

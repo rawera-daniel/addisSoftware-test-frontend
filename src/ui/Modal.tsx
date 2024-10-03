@@ -1,19 +1,9 @@
-import React, { Children, ReactNode } from 'react'
+import React, { Children, ReactNode, useState } from 'react'
 import styled from '@emotion/styled'
 import { useDispatch } from 'react-redux'
 import { closeModal } from '../reducers/modelSlice'
 
 const Overlay = styled.div`
-  /* position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: 'rgba(0, 0, 0, 0.7)';
-  display: flex;
-  align-items: center;
-  justify-content: center; */
-
   position: fixed;
   top: 0;
   left: 0;
@@ -25,19 +15,13 @@ const Overlay = styled.div`
   transition: all 0.5s;
 `
 const ModalStyle = styled.div`
-  /* background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  position: relative;
-  width: 80%;
-  max-width: 500px; */
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
   border-radius: 9px;
-  box-shadow: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.02);
   padding: 3.2rem 4rem;
   transition: all 0.5s;
 `
@@ -62,19 +46,14 @@ const CancelButton = styled.button`
 
 interface ModalProps {
   children: ReactNode
+  onHandleClose: () => void
 }
 
-function Modal({ children }: ModalProps) {
-  const dispatch = useDispatch()
-
-  function handleClose() {
-    return dispatch(closeModal())
-  }
-
+function Modal({ children, onHandleClose }: ModalProps) {
   return (
     <Overlay>
       <ModalStyle>{children}</ModalStyle>
-      <CancelButton onClick={handleClose}>X</CancelButton>
+      <CancelButton onClick={onHandleClose}>X</CancelButton>
     </Overlay>
   )
 }
